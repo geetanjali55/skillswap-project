@@ -26,61 +26,61 @@ if (!currentUser) {
   const currentUserOfferSkills = parseSkills(currentUser.skillOffer);
   const currentUserWantSkills = parseSkills(currentUser.skillWant);
 
-  // Mutual matches (both want each other's skill)
+  // Mutual matches: Both want each other's offered skills
   const matchedUsers = allProfiles.filter(profile => {
     if (profile.name === currentUser.name) return false;
 
     const profileOfferSkills = parseSkills(profile.skillOffer);
     const profileWantSkills = parseSkills(profile.skillWant);
 
+    // Does currentUser want something profile offers?
     const wantsOffered = currentUserWantSkills.some(skill => profileOfferSkills.includes(skill));
+    // Does profile want something currentUser offers?
     const offersWanted = currentUserOfferSkills.some(skill => profileWantSkills.includes(skill));
 
     return wantsOffered && offersWanted;
   });
 
-  // One-sided matches where current user offers skill others want
+  // One-sided matches: Current user offers skill that others want, but they do NOT offer what current user wants
   const oneSidedUsers = allProfiles.filter(profile => {
     if (profile.name === currentUser.name) return false;
 
     const profileOfferSkills = parseSkills(profile.skillOffer);
     const profileWantSkills = parseSkills(profile.skillWant);
 
-    // Only one side matches: current user offers skill profile wants but profile does NOT offer skill current user wants
     const profileDoesNotOfferWhatUserWants = !profileOfferSkills.some(skill => currentUserWantSkills.includes(skill));
     const offersWanted = currentUserOfferSkills.some(skill => profileWantSkills.includes(skill));
 
     return offersWanted && profileDoesNotOfferWhatUserWants;
   });
 
+  // Utility function to show a message inside a container
   function renderAlert(container, message) {
     container.innerHTML = `<p>${message}</p>`;
   }
 
-  // Render mutual matches
+  // Render mutual matches or fallback message
   if (matchedUsers.length === 0) {
     renderAlert(matchesContainer, "No mutual matches found right now.");
   } else {
     matchesContainer.innerHTML = '';
     matchedUsers.forEach(profile => {
-      const card = createUserCard(profile);
-      matchesContainer.appendChild(card);
+      matchesContainer.appendChild(createUserCard(profile));
     });
   }
 
-  // Render one-sided matches
+  // Render one-sided matches or fallback message
   if (oneSidedUsers.length === 0) {
     renderAlert(oneSidedContainer, "No one-sided interest matches found.");
   } else {
     oneSidedContainer.innerHTML = '';
     oneSidedUsers.forEach(profile => {
-      const card = createUserCard(profile);
-      oneSidedContainer.appendChild(card);
+      oneSidedContainer.appendChild(createUserCard(profile));
     });
   }
 }
 
-// Helper to create user card
+// Create user card element with chat button
 function createUserCard(profile) {
   const card = document.createElement('div');
   card.className = 'user-card';
@@ -92,7 +92,6 @@ function createUserCard(profile) {
     <button class="chat-btn">💬 Chat</button>
   `;
 
-  // Attach event listener for chat button
   card.querySelector('.chat-btn').addEventListener('click', () => openChat(profile));
 
   return card;
@@ -100,7 +99,7 @@ function createUserCard(profile) {
 
 let activeChatProfile = null;
 
-// Open chat preview UI
+// Open chat preview with selected profile
 function openChat(profile) {
   activeChatProfile = profile;
   chatUserName.textContent = profile.name;
@@ -109,7 +108,7 @@ function openChat(profile) {
   chatPreview.classList.remove('hidden');
 }
 
-// Send chat message (simulate)
+// Send chat message simulation
 sendChatBtn.addEventListener('click', () => {
   const message = chatInput.value.trim();
   if (!message) return;
@@ -117,7 +116,7 @@ sendChatBtn.addEventListener('click', () => {
   addChatMessage(message, 'outgoing');
   chatInput.value = '';
 
-  // Simulate reply with delay
+  // Simulate a reply after 1.5 seconds
   setTimeout(() => {
     addChatMessage(`Thanks for your message! Let's connect soon.`, 'incoming');
   }, 1500);
@@ -138,11 +137,11 @@ closeChatBtn.addEventListener('click', () => {
   chatMessages.innerHTML = '';
 });
 
-// Email button functionality
+// Email chat button functionality
 emailChatBtn.addEventListener('click', () => {
   if (!activeChatProfile) return;
 
-  const recipientEmail = activeChatProfile.email || ''; // We'll talk about this below
+  const recipientEmail = activeChatProfile.email || '';
   const currentUserEmail = currentUser.email || '';
 
   if (!recipientEmail) {
@@ -150,12 +149,11 @@ emailChatBtn.addEventListener('click', () => {
     return;
   }
 
-  // Construct mailto link with recipient's email in "To" and sender's email in "From" (can't set From in mailto)
-  // So, what we can do: put sender's email in body or subject or cc (cc/bcc)
   const subject = encodeURIComponent("SkillSwap: Let's connect!");
-  const body = encodeURIComponent(`Hi ${activeChatProfile.name},\n\nI'd like to connect with you for a skill swap.\n\nMy email: ${currentUserEmail}\n\nBest regards,\n${currentUser.name}`);
+  const body = encodeURIComponent(
+    `Hi ${activeChatProfile.name},\n\nI'd like to connect with you for a skill swap.\n\nMy email: ${currentUserEmail}\n\nBest regards,\n${currentUser.name}`
+  );
 
-  // mailto link with To, Subject, Body
   const mailtoLink = `mailto:${recipientEmail}?subject=${subject}&body=${body}`;
 
   window.location.href = mailtoLink;
