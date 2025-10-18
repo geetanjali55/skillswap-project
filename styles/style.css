@@ -373,5 +373,59 @@ input[type="email"]:focus {
   background: #fffdfa;
   outline: none;
 }
+/* Add to your existing CSS */
+
+/* Save for Later Button */
+.save-btn {
+  background: #6aa7e9;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  padding: 0.5rem 1.25rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow:
+    0 3px 6px rgba(106, 167, 233, 0.7),
+    inset 0 -2px 4px #4a8fd4;
+  margin-top: 0.5rem;
+  transition: background 0.3s ease;
+}
+
+.save-btn:hover {
+  background: #4a8fd4;
+}
+
+/* Saved Profiles Section */
+.saved-profiles-section {
+  margin-top: 3rem;
+}
+
+.saved-profiles-section h3 {
+  color: #4a4a4a;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+/* Remove Save Button on saved profiles */
+.remove-save-btn {
+  background: #f28c8c;
+  color: #fff7f7;
+  border: none;
+  border-radius: 30px;
+  padding: 0.5rem 1.25rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow:
+    0 3px 6px rgba(184, 106, 106, 0.7),
+    inset 0 -2px 4px #a45454;
+  margin-top: 0.5rem;
+  transition: background 0.3s ease;
+}
+
+.remove-save-btn:hover {
+  background: #d56262;
+}
+
 
 
