@@ -357,5 +357,21 @@ input[type="text"]:focus {
 .user-card {
   margin-bottom: 15px;
 }
+input[type="email"] {
+  padding: 0.5rem 0.75rem;
+  margin-bottom: 1.25rem;
+  border: 2px solid #cbbfaf;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-family: 'Georgia', serif;
+  background: #f9f4e9;
+  transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+input[type="email"]:focus {
+  border-color: #a3896a;
+  background: #fffdfa;
+  outline: none;
+}
 
 
