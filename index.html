@@ -1,4 +1,3 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,10 +5,185 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>SkillSwap - Skill Input & Profile Setup</title>
   <link rel="stylesheet" href="styles/style.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f0f8ff;
+      overflow-x: hidden;
+    }
+
+    /* Floating brain on right side fixed */
+    .floating-brain {
+      position: fixed;
+      top: 100px;
+      right: 40px;
+      width: 120px;
+      z-index: 5;
+      transition: transform 0.3s ease, filter 0.3s ease;
+      filter: drop-shadow(0 0 5px rgba(255, 153, 0, 0.3));
+      animation: gentleWiggle 5s ease-in-out infinite;
+    }
+    .floating-brain:hover {
+      transform: rotate(5deg) scale(1.1);
+      filter: drop-shadow(0 0 10px rgba(255, 102, 0, 0.6));
+    }
+    @keyframes gentleWiggle {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
+    /* Full width hero section */
+    .hero-section {
+      width: 100vw;
+      background: linear-gradient(135deg, #f9d976 0%, #f28c8c 100%);
+      color: white;
+      padding: 3rem 1rem 4rem;
+      box-shadow: 0 8px 25px rgba(242, 140, 140, 0.5);
+      border-radius: 0 0 20px 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    /* center content inside hero but limit width */
+    .hero-section .content-wrapper {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .hero-section h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      font-weight: 800;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.2);
+    }
+    .hero-section p {
+      font-size: 1.25rem;
+      margin-bottom: 2rem;
+      font-weight: 600;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.15);
+    }
+    .hero-buttons button {
+      background: white;
+      color: #f28c8c;
+      font-weight: 700;
+      border: none;
+      border-radius: 30px;
+      padding: 0.75rem 2rem;
+      margin: 0 0.5rem;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow:
+        0 3px 7px rgba(242, 140, 140, 0.7),
+        inset 0 -2px 5px #b84e4e;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+    .hero-buttons button:hover {
+      background: #f28c8c;
+      color: white;
+      box-shadow:
+        0 6px 15px rgba(242, 140, 140, 0.9),
+        inset 0 -3px 7px #7b2d2d;
+    }
+
+    /* page container with form and other content */
+    .page-container {
+      max-width: 600px;
+      margin: 3rem auto 4rem;
+      padding: 0 1rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Other sections same max width */
+    .recommendations-section,
+    .saved-profiles-section {
+      background: #fff;
+      padding: 2rem;
+      margin-top: 3rem;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    /* recommendations and saved profiles grids */
+    .recommendations-grid,
+    #saved-profiles-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    /* user card style */
+    .user-card {
+      background: #fefefe;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 1rem;
+      flex: 1 1 250px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      position: relative;
+    }
+
+    /* Side quotes fixed background */
+    .side-quotes {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+    }
+    .side-quote {
+      position: absolute;
+      font-size: 2.5rem;
+      font-weight: 600;
+      color: rgba(0, 0, 0, 0.08);
+      font-family: 'Segoe UI', sans-serif;
+      white-space: nowrap;
+      transition: transform 0.3s ease-out;
+      user-select: none;
+      text-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    }
+    .side-quote:nth-child(1) { font-size: 3rem; color: rgba(255, 102, 0, 0.08); }
+    .side-quote:nth-child(2) { font-size: 2.3rem; color: rgba(0, 0, 0, 0.06); }
+    .side-quote:nth-child(3) { font-size: 2.6rem; color: rgba(255, 68, 0, 0.08); }
+  </style>
 </head>
+
 <body>
+
+  <!-- Floating Brain Icon -->
+  <img
+    src="https://tse4.mm.bing.net/th/id/OIP.p81Ig9UBzOwOV8Im3JmN4AHaHa?pid=Api&P=0&h=180"
+    alt="Brain Icon"
+    class="floating-brain"
+    title="Brain Power! Hover me!"
+  />
+
+  <!-- Background Side Quotes -->
+  <div class="side-quotes">
+    <span class="side-quote" style="top: 15%; left: 5%;">“Learning never exhausts the mind.”</span>
+    <span class="side-quote" style="top: 40%; right: 6%;">“Education is the most powerful weapon.”</span>
+    <span class="side-quote" style="top: 75%; left: 8%;">“An investment in knowledge pays the best interest.”</span>
+  </div>
+
+  <!-- Hero / Welcome Section at the Top - full width -->
+  <section class="hero-section">
+    <div class="content-wrapper">
+      <h1>Welcome to SkillSwap 🌱</h1>
+      <p>Connect. Learn. Teach. Grow.</p>
+      <div class="hero-buttons">
+        <button onclick="scrollToSection('form-section')">Get Started</button>
+        <button onclick="scrollToSection('saved-profiles')">Saved Profiles</button>
+        <button onclick="scrollToSection('recommendations')">Browse Swaps</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content: form and other sections centered below hero -->
   <main class="page-container">
-    <section class="envelope-container">
+    <section id="form-section" class="envelope-container">
       <div class="envelope">
         <div class="body">
           <div class="card" tabindex="0">
@@ -37,16 +211,37 @@
       </div>
     </section>
 
-    <section class="recommendations-section">
+    <section id="recommendations" class="recommendations-section">
       <h3>Find Available Skill Swaps</h3>
       <input type="search" id="search-filter" placeholder="Search by skill or name..." />
-      <div id="recommendations" class="recommendations-grid"></div>
+      <div class="recommendations-grid"></div>
     </section>
-    <section class="saved-profiles-section">
-  <h3>Saved Profiles for Later</h3>
-  <div id="saved-profiles-list" class="recommendations-grid"></div>
-</section>
+
+    <section id="saved-profiles" class="saved-profiles-section">
+      <h3>Saved Profiles for Later</h3>
+      <div id="saved-profiles-list" class="recommendations-grid"></div>
+    </section>
   </main>
+
+  <!-- JavaScript for scroll parallax effect on quotes -->
+  <script>
+    window.addEventListener("scroll", () => {
+      const scrollY = window.scrollY;
+      const quotes = document.querySelectorAll(".side-quote");
+      quotes.forEach((quote, i) => {
+        const speed = (i + 1) * 0.15;
+        quote.style.transform = `translateY(${scrollY * speed}px)`;
+      });
+    });
+
+    function scrollToSection(id) {
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  </script>
+
   <script src="scripts/main.js"></script>
 </body>
 </html>
