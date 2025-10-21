@@ -514,24 +514,6 @@ body {
       z-index: 2;
     }
 
-    /* Other sections same max width */
-    .recommendations-section,
-    .saved-profiles-section {
-      background: #fff;
-      padding: 2rem;
-      margin-top: 3rem;
-      border-radius: 15px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
-
-    /* recommendations and saved profiles grids */
-    .recommendations-grid,
-    #saved-profiles-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-
     /* user card style */
     .user-card {
       background: #fefefe;
@@ -565,8 +547,312 @@ body {
       user-select: none;
       text-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
     }
-    .side-quote:nth-child(1) { font-size: 3rem; color: rgba(255, 102, 0, 0.08); }
-    .side-quote:nth-child(2) { font-size: 2.3rem; color: rgba(0, 0, 0, 0.06); }
-    .side-quote:nth-child(3) { font-size: 2.6rem; color: rgba(255, 68, 0, 0.08); }
+    .recommendations-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
 
+  max-height: 380px;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+
+.recommendations-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  max-height: 380px;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #FAF9F6; /* Creamy white */
+    color: #2F5755; /* Deep teal */
+    overflow-x: hidden;
+  }
+
+  .floating-brain {
+    position: fixed;
+    top: 100px;
+    right: 40px;
+    width: 120px;
+    z-index: 5;
+    transition: transform 0.3s ease, filter 0.3s ease;
+    filter: drop-shadow(0 0 5px rgba(47, 87, 85, 0.3));
+    animation: gentleWiggle 5s ease-in-out infinite;
+  }
+
+  .floating-brain:hover {
+    transform: rotate(5deg) scale(1.1);
+    filter: drop-shadow(0 0 10px rgba(47, 87, 85, 0.5));
+  }
+
+  @keyframes gentleWiggle {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+  }
+
+  .hero-section {
+    width: 100vw;
+    background: linear-gradient(135deg, #FDFBF4 0%, #E8F1EE 100%);
+    color: #2F5755;
+    padding: 3rem 1rem 4rem;
+    box-shadow: 0 8px 25px rgba(47, 87, 85, 0.15);
+    border-radius: 0 0 20px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-section h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    font-weight: 800;
+    text-shadow: 2px 2px 6px rgba(0,0,0,0.05);
+  }
+
+  .hero-section p {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+    font-weight: 600;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.05);
+  }
+
+  .hero-buttons button {
+    background: #ffffff;
+    color: #2F5755;
+    font-weight: 700;
+    border: 2px solid #2F5755;
+    border-radius: 30px;
+    padding: 0.75rem 2rem;
+    margin: 0 0.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: 0 3px 7px rgba(47, 87, 85, 0.2);
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+
+  .hero-buttons button:hover {
+    background: #2F5755;
+    color: #ffffff;
+    box-shadow: 0 6px 15px rgba(47, 87, 85, 0.3);
+  }
+
+  #form-section,
+  #recommendations,
+  #saved-profiles {
+    max-width: 600px;
+    margin: 3rem auto 0;
+    background: #ffffff;
+    color: #2F5755;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    text-align: left;
+    position: relative;
+    z-index: 2;
+  }
+
+  #form-section h2 {
+    color: #2F5755;
+    margin-bottom: 1rem;
+    font-weight: 700;
+  }
+
+  #recommendations h3,
+  #saved-profiles h3 {
+    color: #2F5755;
+    margin-bottom: 1rem;
+    font-weight: 700;
+  }
+
+  #search-filter {
+    width: 100%;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border: 1px solid #DCDCDC;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+  }
+
+  .recommendations-grid,
+  #saved-profiles-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .user-card {
+    background: #ffffff;
+    border: 1px solid #DCDCDC;
+    border-radius: 10px;
+    padding: 1rem;
+    flex: 1 1 250px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    position: relative;
+  }
+
+  .side-quotes {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+  }
+
+  .side-quote {
+    position: absolute;
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: rgba(47, 87, 85, 0.08);
+    font-family: 'Segoe UI', sans-serif;
+    white-space: nowrap;
+    transition: transform 0.3s ease-out;
+    user-select: none;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.02);
+  }
+
+  .side-quote:nth-child(1) { font-size: 3rem; color: rgba(47, 87, 85, 0.08); }
+  .side-quote:nth-child(2) { font-size: 2.3rem; color: rgba(0, 0, 0, 0.05); }
+  .side-quote:nth-child(3) { font-size: 2.6rem; color: rgba(47, 87, 85, 0.06); }
+
+
+.saved-profiles-section {
+  margin-top: 40px;
+  padding: 20px;
+  background-color: #f0f0f0;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 100%; /* Ensure it takes full available width */
+  overflow-x: auto;  /* Enable horizontal scrolling */
+  white-space: nowrap; /* Prevents wrapping of cards to the next line */
+}
+
+#saved-profiles-list {
+  display: inline-flex;
+  gap: 15px;  /* Space between cards */
+}
+.saved-profiles-list {
+  max-height: 300px;
+  overflow-y: auto; /* or scroll */
+}
+
+.remove-save-btn {
+  background-color: #e74c3c;
+  color: white;
+  padding: 8px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.remove-save-btn:hover {
+  background-color: #c0392b;
+}
+
+
+
+
+
+
+
+#recommendations {
+  background-color: #088668; /* Background color */
+  height: 500px;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  /* 👇 Layout for full-width + horizontal scroll */
+  width: 100vw;              /* Almost full screen width */
+  max-width: 1500px;        /* Optional: keep it from going too wide */
+  margin: 0 auto;           /* Center the section */
+
+  display: flex;            /* Place items in a row */
+  gap: 1rem;                /* Space between items */
+
+  overflow-x: auto;         /* Enable horizontal scroll */
+  overflow-y: hidden;       /* Disable vertical scroll */
+  scroll-behavior: smooth;  /* Smooth scrolling */
+  white-space: nowrap;      /* Prevent wrapping to next line */
+}
+#recommendations .user-card {
+  background: #fff9f2;
+  border-radius: 15px;
+  box-shadow:
+    0 4px 8px rgba(0, 0, 0, 0.1),
+    inset 0 0 8px #dbd1c7;
+  padding: 1.4rem 1.8rem;
+  width: 400px;              /* Slightly wider for better text fit */
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  color: #4a4a4a;
+  text-align: left;
+  font-family: 'Georgia', serif;
+}
+
+/* Hover effect */
+#recommendations .user-card:hover {
+  transform: translateY(-12px) scale(1.04); /* More lift */
+  box-shadow:
+    0 15px 30px rgba(0, 0, 0, 0.35),        /* Deep outer shadow */
+    0 8px 20px rgba(0, 0, 0, 0.25),         /* Softer spread shadow */
+    inset 0 0 25px rgba(203, 191, 175, 0.85); /* Stronger inner glow */
+  transition: all 0.3s ease;
+}
+
+
+
+
+/* Name / Title inside card */
+#recommendations .user-card h4 {
+  margin-bottom: 0.6rem;
+  color: #725b45;
+  font-size: 1.5rem;     /* Increased from 1.1rem */
+  font-weight: 700;
+}
+
+/* Description text */
+#recommendations .user-card p {
+  font-size: 1.2rem;        /* Increased from 0.9rem */
+  color: #6b5842;
+  margin-bottom: 1rem;
+  line-height: 1.5;       /* Improved readability */
+}
+
+/* Select Button */
+#recommendations .user-card .select-btn {
+  align-self: center;
+  background: #f28c8c;
+  color: #fff7f7;
+  border: none;
+  border-radius: 40px;        /* Slightly rounder */
+  padding: 0.8rem 2rem;       /* Increased padding for size */
+  font-weight: 700;
+  font-size: 1.5rem;          /* Keeps your large readable font */
+  cursor: pointer;
+  box-shadow:
+    0 4px 8px rgba(184, 106, 106, 0.7),
+    inset 0 -3px 6px #a45454;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+#recommendations .user-card .select-btn:hover {
+  background: #d56262;
+  transform: scale(1.08);     /* Slightly bigger hover effect */
+}
+#recommendations .user-card {
+  overflow-y: auto;
+  max-height: 100%; /* Keep it within container height */
+}
 

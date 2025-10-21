@@ -5,7 +5,8 @@ function delay(ms) {
 
 // DOM Elements
 const form = document.getElementById("profile-form");
-const recommendationsGrid = document.getElementById("recommendations");
+const recommendationsGrid = document.querySelector(".recommendations-grid");
+
 const searchInput = document.getElementById("search-filter");
 const savedProfilesContainer = document.getElementById("saved-profiles-list");
 
