@@ -857,11 +857,6 @@ body {
 }
 
 
-
-
-
-
-
 /* Responsive Tweaks */
 @media (max-width: 600px) {
   body {
@@ -1084,5 +1079,34 @@ body {
   }
 }
 
+@media (max-width: 768px) {
+  #recommendations {
+    flex-direction: column;     /* Stack cards vertically */
+    height: auto;
+    overflow-x: hidden;
+    white-space: normal;
+    padding: 1rem;
+  }
+
+  #recommendations .user-card {
+    width: 100%;                /* Full width on small screens */
+    max-width: 100%;
+    padding: 1rem;
+    font-size: 1rem;
+  }
+
+  #recommendations .user-card h4 {
+    font-size: 1.3rem;
+  }
+
+  #recommendations .user-card p {
+    font-size: 1rem;
+  }
+
+  #recommendations .user-card .select-btn {
+    font-size: 1.1rem;
+    padding: 0.6rem 1.5rem;
+  }
+}
 
 
