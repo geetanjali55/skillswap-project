@@ -744,7 +744,7 @@ body {
 }
 
 .remove-save-btn {
-  background-color: #e74c3c;
+  background-color: #e74735;
   color: white;
   padding: 8px;
   border: none;
@@ -763,7 +763,7 @@ body {
 
 
 #recommendations {
-  background-color: #088668; /* Background color */
+  background-color: #ea9292; /* Background color */
   height: 500px;
   padding: 30px;
   border-radius: 8px;
