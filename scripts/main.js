@@ -6,12 +6,14 @@ function delay(ms) {
 // DOM Elements
 const form = document.getElementById("profile-form");
 const recommendationsGrid = document.querySelector(".recommendations-grid");
-
 const searchInput = document.getElementById("search-filter");
 const savedProfilesContainer = document.getElementById("saved-profiles-list");
 
 let allProfiles = [];
 let savedProfiles = [];
+
+// Regex patterns
+const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // simple email validation
 
 // Load profiles on page load
 window.addEventListener("DOMContentLoaded", () => {
@@ -25,23 +27,40 @@ window.addEventListener("DOMContentLoaded", () => {
   renderSavedProfiles();
 });
 
-// Handle form submission
+// Handle form submission with validation
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  const user = {
-    name: form.name.value.trim(),
-    skillOffer: form.skillOffer.value.trim(),
-    skillWant: form.skillWant.value.trim(),
-    location: form.location.value.trim(),
-    email: form.email.value.trim(),
-  };
+  const name = form.name.value.trim();
+  const skillOffer = form.skillOffer.value.trim();
+  const skillWant = form.skillWant.value.trim();
+  const location = form.location.value.trim();
+  const email = form.email.value.trim();
+
+  // Validation
+  if (!name || !skillOffer || !skillWant || !location) {
+    alert("Please fill out all required fields.");
+    return;
+  }
+
+  if (name.length > 50) {
+    alert("Name should not exceed 50 characters.");
+    return;
+  }
+
+  if (email && !emailPattern.test(email)) {
+    alert("Please enter a valid email address.");
+    return;
+  }
+
+  const user = { name, skillOffer, skillWant, location, email };
 
   await delay(500);
+
   allProfiles.push(user);
   localStorage.setItem("skillSwap_profiles", JSON.stringify(allProfiles));
 
-  document.querySelector(".card").classList.add("locked");
+  document.querySelector(".card")?.classList.add("locked");
   showSuccessMessage();
   renderRecommendations();
 });
@@ -80,9 +99,7 @@ function renderRecommendations() {
       <button class="save-btn">💾 Save for Later</button>
     `;
 
-    card
-      .querySelector(".save-btn")
-      .addEventListener("click", () => saveProfileForLater(profile));
+    card.querySelector(".save-btn").addEventListener("click", () => saveProfileForLater(profile));
     recommendationsGrid.appendChild(card);
   });
 }
@@ -109,10 +126,7 @@ function saveProfileForLater(profile) {
   }
 
   savedProfiles.push(profile);
-  localStorage.setItem(
-    "skillSwap_savedProfiles",
-    JSON.stringify(savedProfiles)
-  );
+  localStorage.setItem("skillSwap_savedProfiles", JSON.stringify(savedProfiles));
   renderSavedProfiles();
 }
 
@@ -150,9 +164,6 @@ function renderSavedProfiles() {
 // Remove from saved
 function removeSavedProfile(name) {
   savedProfiles = savedProfiles.filter((p) => p.name !== name);
-  localStorage.setItem(
-    "skillSwap_savedProfiles",
-    JSON.stringify(savedProfiles)
-  );
+  localStorage.setItem("skillSwap_savedProfiles", JSON.stringify(savedProfiles));
   renderSavedProfiles();
 }
